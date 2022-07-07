@@ -1,5 +1,7 @@
 import { nanoid } from 'nanoid';
-import { useState, useEffect, useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setFilter } from '../store/filter';
 import style from './App.module.css';
 import { ContactForm } from './ContactForm';
 import { Filter } from './Filter';
@@ -23,8 +25,11 @@ const initialState = localStorage.getItem(CONTACTS_LIST)
   : [];
 
 const App = () => {
+  // const state = store.getState();
+  const filter = useSelector(state => state.contacts.filter);
+  const dispatch2 = useDispatch();
+
   const [contacts, dispatch] = useReducer(reducer, initialState);
-  const [filter, setFilter] = useState('');
 
   useEffect(() => {
     localStorage.setItem(CONTACTS_LIST, JSON.stringify(contacts));
@@ -53,7 +58,7 @@ const App = () => {
       <h2>Contacts</h2>
       {contacts.length > 0 && (
         <>
-          <Filter value={filter} onChange={setFilter} />
+          <Filter value={filter} onChange={e => dispatch2(setFilter(e))} />
           <ContactList
             contacts={contacts}
             filter={filter.toLowerCase()}
