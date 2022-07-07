@@ -1,5 +1,4 @@
 import { nanoid } from 'nanoid';
-import { useEffect, useReducer } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setFilter } from '../store/filter';
 import style from './App.module.css';
@@ -8,19 +7,11 @@ import { Filter } from './Filter';
 import { ContactList } from './ContactList';
 import { addItem, deleteItem } from '../store/items';
 
-// const initialState = localStorage.getItem(CONTACTS_LIST)
-//   ? JSON.parse(localStorage.getItem(CONTACTS_LIST))
-//   : [];
-
 const App = () => {
   const filter = useSelector(state => state.contacts.filter);
   const contacts = useSelector(state => state.contacts.items);
 
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   localStorage.setItem(CONTACTS_LIST, JSON.stringify(contacts));
-  // }, [contacts]);
 
   const addContact = (name, number) => {
     const nameNormalized = name.toLowerCase();
