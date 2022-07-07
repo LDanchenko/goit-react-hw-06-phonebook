@@ -1,16 +1,15 @@
 import { nanoid } from 'nanoid';
 import { useSelector, useDispatch } from 'react-redux';
 import { setFilter } from '../store/filter';
-import style from './App.module.css';
 import { ContactForm } from './ContactForm';
 import { Filter } from './Filter';
 import { ContactList } from './ContactList';
 import { addItem, deleteItem } from '../store/items';
+import style from './App.module.css';
 
 const App = () => {
   const filter = useSelector(state => state.contacts.filter);
   const contacts = useSelector(state => state.contacts.items);
-
   const dispatch = useDispatch();
 
   const addContact = (name, number) => {
